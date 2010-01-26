@@ -67,7 +67,7 @@ def headMarkup ():
 			font-family: "Palatino", Georgia, serif;
 			margin: auto;
 			max-width: 60em;
-			color: #111;
+			color: #51110a;
 		}
 		h1 {
 			font-size: 144%;
@@ -131,7 +131,7 @@ def headMarkup ():
 			content: "– Control Character";
 			font-style: italic;
 			text-transform: none;
-			color: #111;
+			color: #51110a;
 			margin-left: 0.3em;
 		}
 		tr.combining td.name:after {
@@ -141,7 +141,7 @@ def headMarkup ():
 			content: "– Surrogate Character";
 		}
 		.decomposition {
-			color: #111;
+			color: #51110a;
 			margin-left: 0.3em;
 			text-transform: none;
 		}
@@ -152,7 +152,7 @@ def headMarkup ():
 			font-weight: normal !important;
 			text-transform: none !important;
 			padding: 0.5em;
-			color: #111 !important;
+			color: #51110a !important;
 		}
 		th.dec, th.hex {
 			cursor: pointer;
@@ -168,6 +168,7 @@ def headMarkup ():
 			font-style: italic;
 			margin: auto;
 			text-align: center;
+			color: #51110a;
 		}
 	</style>
 	<script type="text/javascript">
@@ -230,7 +231,7 @@ def tableHeadMarkup():
 			
 	tableHeadMarkup = ["\n	<table id='resulttable' class='", numberstyle, """'>
 		<tr>
-			<th class='no'>#</th>
+			<th class='no'></th>
 			<th class='char'>Char</th>
 			<th class='hex' onclick='javascript:toggleNumberStyle();'>Hex</th>
 			<th class='dec' onclick='javascript:toggleNumberStyle();'>Dec</th>
@@ -269,7 +270,7 @@ def tableRowMarkupForCharacterAtPosition(char, position):
 	decompositionMarkup = ""
 	if len(decomposed) > 1:
 		decomposition = " ".join(unicodedata.normalize("NFKD", char))
-		decompositionMarkup = "<span class='decomposition'>Decomposes To: " + decomposition + "</span>"
+		decompositionMarkup = "<span class='decomposition'>Decomposes to: " + decomposition + "</span>"
 	
 		
 	rowstylestring = ""
@@ -313,5 +314,5 @@ else:
 	</p>
 """]
 output += footMarkup()
-print output
+# print output
 print "".join(output)
