@@ -75,14 +75,23 @@ def headMarkup ():
 			font-style: italic;
 			text-align: center;
 		}
+		#main {
+			width: 70%;
+			margin: auto;
+		}
+		p {
+			margin: 1em auto;
+			text-align: center;
+		}
 		form {
 			text-align: center;
+			margin-bottom: 2em;
 		}
 		form input {
 			font-size: 120%;
 		}
 		form input.text {
-			width:70%;
+			width:60%;
 		} 
 		table {
 			margin: 1em auto;
@@ -105,7 +114,7 @@ def headMarkup ():
 			color: #666;
 		}
 		.hex0x {
-			color: #c6b6a4;
+			color: #d2c1ae;
 		}
 		table .name {
 			text-align: left;
@@ -135,9 +144,18 @@ def headMarkup ():
 			font-weight: normal !important;
 			text-transform: none !important;
 			padding: 0.5em;
+			color: #111 !important;
 		}
 		td {
 			padding: 0em 0.5em;
+		}
+		#foot {
+			margin: 1em;
+			padding-top: 2em;
+			width: 80%;
+			font-style: italic;
+			margin: auto;
+			text-align: center;
 		}
 	</style>
 </head>"""]
@@ -159,7 +177,19 @@ def headMarkup ():
 
 
 def footMarkup():
-	footMarkup = ["</body>\n</html>"]
+	footMarkup = ["""	</div>
+	<div id="foot">
+	<hr>
+	<p>	
+		A service by <a href="http://earthlingsoft.net">earthlingsoft</a> 
+		·
+		<a href="mailto:ssp-web@earthlingsoft.net?subject=Unicode%20Split%20Up">Send Feedback</a>
+	</p>
+	<p>
+		Finding this tool useful and using a Mac? Then try our <a href="http://earthlingsoft.net/UnicodeChecker/">UnicodeChecker</a> application!
+	</p>
+	</div>
+</body>\n</html>"""]
 	return footMarkup
 
 
@@ -225,5 +255,12 @@ if form.has_key("q"):
 			output += tableRowMarkupForCharacterAtPosition(char, position)
 			position = position + 1
 		output += tableFootMarkup()
+else:
+	output += ["""	<p>
+		Enter the string you want to split up and click the »Split Up« button.
+	</p><p>
+		The site will then display information on each codepoint in the string and highlight combining characters.
+	</p>
+"""]
 output += footMarkup()
 print "".join(output)
