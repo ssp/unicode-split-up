@@ -105,8 +105,11 @@ def headMarkup ():
 			font-size: 144%;
 			text-align: center;
 		}
-		table .dec {
+		table.dec .hex, table.hex .dec {
 			display: none;
+		}
+		table.dec .dec, table.hex .hex {
+			display: block;
 		}
 		table .hex, table .dec {
 			text-align: right;
@@ -146,8 +149,12 @@ def headMarkup ():
 			padding: 0.5em;
 			color: #111 !important;
 		}
+		th.dec, th.hex {
+			cursor: pointer;
+		}
 		td {
 			padding: 0em 0.5em;
+			vertical-align: baseline;
 		}
 		#foot {
 			margin: 1em;
@@ -158,18 +165,34 @@ def headMarkup ():
 			text-align: center;
 		}
 	</style>
+	<script type="text/javascript">
+	function toggleNumberStyle () {
+		var tableElement = document.getElementById("resulttable");
+		var newStyle = "dec";
+		if (tableElement.className == "dec") {
+			newStyle = "hex";
+		}
+		tableElement.className = newStyle;
+		document.getElementById("numberstyle").value = newStyle;
+	}
+	</script>
 </head>"""]
 
 	qS = "" 
 	if form.has_key("q"):
 		qS = unicode(form["q"].value)
+	nS = ""
+	if form.has_key("numberstyle"):
+		nS = form["numberstyle"].value
 
 	headMarkup += ["""<body>
 	<h1>Split Up Unicode Strings</h1>
 	<form>
 		<input name="q" placeholder="Your String Here" autofocus class="text" value='""", escapeHTML(qS), """'>
+		<input type="hidden" name="numberstyle" id="numberstyle" value='""", nS, """'>
 		<input type="submit" value="Split Up">
 	</form>
+	<div id="main">
 """]
 	return headMarkup
 
@@ -180,8 +203,8 @@ def footMarkup():
 	footMarkup = ["""	</div>
 	<div id="foot">
 	<hr>
-	<p>	
-		A service by <a href="http://earthlingsoft.net">earthlingsoft</a> 
+	<p>
+		A service by <a href="http://earthlingsoft.net">earthlingsoft</a>
 		·
 		<a href="mailto:ssp-web@earthlingsoft.net?subject=Unicode%20Split%20Up">Send Feedback</a>
 	</p>
@@ -195,7 +218,20 @@ def footMarkup():
 
 
 def tableHeadMarkup():
-	tableHeadMarkup = ["""\n	<table>\n			<tr><th class='no'>#</th><th class='char'>Char</th><th class='hex'>Hex</th><th class='dec'>Dec</th><th class='name'>Name</th>\n"""]
+	numberstyle = "hex"
+	if form.has_key("numberstyle"):
+		if form["numberstyle"].value == "dec":
+			numberstyle = "dec"
+			
+	tableHeadMarkup = ["\n	<table id='resulttable' class='", numberstyle, """'>
+		<tr>
+			<th class='no'>#</th>
+			<th class='char'>Char</th>
+			<th class='hex' onclick='javascript:toggleNumberStyle();'>Hex</th>
+			<th class='dec' onclick='javascript:toggleNumberStyle();'>Dec</th>
+			<th class='name'>Name
+		</th>
+"""]
 	return tableHeadMarkup
 
 
