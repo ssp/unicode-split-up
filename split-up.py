@@ -56,6 +56,11 @@ def headMarkup ():
 <html lang="en">
 <head>
 	<title>Split up Unicode Strings</title>
+	<meta name="description" content="Splits up a string into its Unicode codepoints. Reveals names, Unicode hex and combining characters in the process.">
+	<meta name="keywords" content="unicode split string text">
+	<meta name="viewport" content="width=400">
+	<link rel="author" href="mailto:(Sven-S.%20Porst)%20ssp-web@earthlingsoft.net">
+	<link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXRFWHRDb21tZW50ACCyRK3OAAACh0lEQVR4nGRTvU/aYRB+EALSJqVNGGSALupQTCCCEZDBKCGIHwE7khQWNOFfsVt3CUMXBw1GHUyMDhr+gYahMQTj4Ec6MPAVLPx6zxVIPy65/O5975675+69H/C3uC0WS8RmsyWtVmta9ONQU7wTX1Ri3uNfMZlMfq/X+y2VShnZbNbY2dkxdnd3jUKhoEqbd7lczkin08b09HSFxYidIF7AXzc2Nrzb29uQBJBA5PN5JJNJrK2tqc07+tbX17G5uRnyeDxfRgk8kvGDJEE0GoXb7cbU1BR6vR5ubm5wfX2Nbrerd/QtLy9jZmYGgokJ1mwym82hTCZTYQUGSDt4enrCycmJ2tSXlxdWhcvl0par1SqKxSKOjo5cE5LgjQwIMiiIjefnZ5TLZfj9/nE7q6urODs7w+PjI2SQsNvtmJycZPJ3bMHKKkxAMAPb7TZqtRr29/dRKpWwsLAAFiErJqFNjIjNwjmIoNVq4erqCo1GQ6s8PDwodZ/Pp3f0dzodLRAKhUYJTGRgiCglDocOngeDAebm5vQlDg4OFEwfY9gCY/QV5PLn6BAOh5UuwRQyOT09xd3dnYIDgQAikcifK9S3CLjV7/eVLhORHr+VSgUOh4P96Xl+fl7BtBk/LNqbEOCPZrOpFPG7nzETVq7X6wgGg1haWlIfmTCWBUWanIQ9Fos1ZAutfC7SHq43Li8vFbSysjLumQt2fn6O4+PjzsXFxVsdpWxZSXb80+zsrC4Th8REo0XiTFiRz3t/f4/b21scHh6WZOFyo2G8djqde4uLi7VEItGVrTOoW1tbqqNzPB7vSMx3if0smFfK9L9fU/Z76LQNbcb0Rbui7aE9ll8AAAD//wMAOQswwpMoWiMAAAAASUVORK5CYII=">
 	<style type="text/css">
 		body {
 			background: #f9e8d0;
@@ -90,6 +95,9 @@ def headMarkup ():
 		table .char {
 			font-size: 144%;
 			text-align: center;
+		}
+		table .dec {
+			display: none;
 		}
 		table .hex, table .dec {
 			text-align: right;
@@ -183,8 +191,7 @@ def tableRowMarkupForCharacterAtPosition(char, position):
 		rowstyle += ["ASCII"]
 	if unicodedata.category(char) == "Cc":
 		rowstyle += ["control"]
-	normalisation = unicodedata.normalize("NFD", char)
-
+		
 	rowstylestring = ""
 	if len(rowstyle) > 0:
 		rowstylestring = " class='" + " ".join(rowstyle) + "'"
