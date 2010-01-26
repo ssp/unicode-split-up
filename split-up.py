@@ -140,6 +140,11 @@ def headMarkup ():
 		tr.combining td.name:after {
 			content: "– Combining Character";
 		}
+		.decomposition {
+			color: #111;
+			margin-left: 0.5em;
+			text-transform: none;
+		}
 		th {
 			font-family: "Palatino", Georgia, serif !important;
 			font-style: italic;
@@ -258,6 +263,13 @@ def tableRowMarkupForCharacterAtPosition(char, position):
 	if unicodedata.category(char) == "Cc":
 		rowstyle += ["control"]
 		
+	decomposed = unicodedata.decomposition(char).split(" ")
+	decompositionMarkup = ""
+	if len(decomposed) > 1:
+		decomposition = " ".join(unicodedata.normalize("NFKD", char))
+		decompositionMarkup = "<span class='decomposition'>Decomposes To: " + decomposition + "</span>"
+	
+		
 	rowstylestring = ""
 	if len(rowstyle) > 0:
 		rowstylestring = " class='" + " ".join(rowstyle) + "'"
@@ -267,7 +279,7 @@ def tableRowMarkupForCharacterAtPosition(char, position):
 	markup += ["				<td class='char'>", escapeHTML(char), "</td>\n"]
 	markup += ["				<td class='hex'>", hexMarkup(char), "</td>\n"]
 	markup += ["				<td class='dec'>", str(ord(char)), "</td>\n"]
-	markup += ["				<td class='name'>", escapeHTML(unicodedata.name(char, "NAME UNKNOWN")), "</td>\n"]
+	markup += ["				<td class='name'>", escapeHTML(unicodedata.name(char, "NAME UNKNOWN")), decompositionMarkup, "</td>\n"]
 	markup += ["		</tr>\n"]
 	
 	return markup
@@ -299,4 +311,5 @@ else:
 	</p>
 """]
 output += footMarkup()
+print output
 print "".join(output)
