@@ -124,25 +124,25 @@ def headMarkup ():
 			text-transform: lowercase;
 			color: #666;
 		}
-		tr.combining {
+		tr.combining, tr.control, tr.surrogate {
 			background: #f5d3d5;
 		}
-		
-		tr.control {
-			background: #f5d3d5;
-		}
-		tr.control td.name:after, tr.combining td.name:after {
+		tr.control td.name:after, tr.combining td.name:after, tr.surrogate td.name:after {
 			content: "– Control Character";
 			font-style: italic;
 			text-transform: none;
 			color: #111;
+			margin-left: 0.3em;
 		}
 		tr.combining td.name:after {
 			content: "– Combining Character";
 		}
+		tr.surrogate td.name:after {
+			content: "– Surrogate Character";
+		}
 		.decomposition {
 			color: #111;
-			margin-left: 0.5em;
+			margin-left: 0.3em;
 			text-transform: none;
 		}
 		th {
@@ -262,6 +262,8 @@ def tableRowMarkupForCharacterAtPosition(char, position):
 		rowstyle += ["ASCII"]
 	if unicodedata.category(char) == "Cc":
 		rowstyle += ["control"]
+	if unicodedata.category(char) == "Cs":
+		rowstyle += ["surrogate"]
 		
 	decomposed = unicodedata.decomposition(char).split(" ")
 	decompositionMarkup = ""
