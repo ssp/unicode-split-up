@@ -55,7 +55,7 @@ def headMarkup ():
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Split up Unicode Strings</title>
+	<title>Split Up Unicode Strings</title>
 	<meta name="description" content="Splits up a string into its Unicode codepoints. Reveals names, Unicode hex and combining characters in the process.">
 	<meta name="keywords" content="unicode split string text">
 	<meta name="viewport" content="width=400">
@@ -354,7 +354,7 @@ if form.has_key("q"):
 		output += tableFootMarkup()
 else:
 	output += ["""	<p>
-		Enter the string you want to split up and click the »Split Up« button.
+		Enter the string you want to split and click the »Split Up« button.
 	</p><p>
 		The site will then display information on each codepoint in the string and highlight combining characters.
 	</p>
