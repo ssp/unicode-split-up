@@ -87,11 +87,12 @@ def headMarkup ():
 			text-align: center;
 			margin-bottom: 2em;
 		}
-		form input {
+		form textarea, form input {
 			font-size: 120%;
 		}
-		form input.text {
+		form textarea {
 			width:60%;
+			margin-bottom: -0.3em;
 		} 
 		table {
 			margin: 1em auto;
@@ -181,6 +182,20 @@ def headMarkup ():
 		tableElement.className = newStyle;
 		document.getElementById("numberstyle").value = newStyle;
 	}
+		
+	function keypressed (myEvent) {
+	  if (!myEvent)
+		myEvent = window.event;
+	  if (myEvent.which) {
+		myKeyCode = myEvent.which;
+	  } else if (myEvent.keyCode) {
+		myKeyCode = myEvent.keyCode;
+	  }
+	  
+	  if (myKeyCode == 10 || myKeyCode == 13) {
+		 document.searchform.submit()
+	  }
+	}
 	</script>
 </head>"""]
 
@@ -193,8 +208,8 @@ def headMarkup ():
 
 	headMarkup += ["""<body>
 	<h1>Split Up Unicode Strings</h1>
-	<form>
-		<input name="q" placeholder="Your String Here" autofocus class="text" value='""", escapeHTML(qS), """'>
+	<form name="searchform">
+		<textarea rows="1" name="q" onkeypress="keypressed(event)" placeholder="Your String Here" autofocus class="text">""" , escapeHTML(qS) , """</textarea>
 		<input type="hidden" name="numberstyle" id="numberstyle" value='""", nS, """'>
 		<input type="submit" value="Split Up">
 	</form>
