@@ -125,7 +125,7 @@ def headMarkup ():
 			text-transform: lowercase;
 			color: #666;
 		}
-		tr.combining, tr.control, tr.surrogate {
+		tr.combining, tr.control, tr.surrogate, tr.non-ASCII {
 			background: #f5d3d5;
 		}
 		tr.control td.name:after, tr.combining td.name:after, tr.surrogate td.name:after {
@@ -134,6 +134,12 @@ def headMarkup ():
 			text-transform: none;
 			color: #51110a;
 			margin-left: 0.3em;
+		}
+		tr.control.tame {
+			background: transparent;
+		}
+		tr.control.tame td.name:after {
+			content: "";
 		}
 		tr.combining td.name:after {
 			content: "– Combining Character";
@@ -276,8 +282,12 @@ def tableRowMarkupForCharacterAtPosition(char, position):
 		rowstyle += ["combining"]
 	if ord(char) < 127:
 		rowstyle += ["ASCII"]
+	else:
+		rowstyle += ["non-ASCII"]
 	if unicodedata.category(char) == "Cc":
 		rowstyle += ["control"]
+	if ord(char) == 9 or ord(char) == 10 or ord(char) == 13:
+		rowstyle += ["tame"]
 	if unicodedata.category(char) == "Cs":
 		rowstyle += ["surrogate"]
 		
@@ -291,13 +301,21 @@ def tableRowMarkupForCharacterAtPosition(char, position):
 	rowstylestring = ""
 	if len(rowstyle) > 0:
 		rowstylestring = " class='" + " ".join(rowstyle) + "'"
+		
+	characterName = escapeHTML(unicodedata.name(char, "NAME UNKNOWN"))
+	if ord(char) == 9:
+		characterName = "TAB"
+	elif ord(char) == 10:
+		characterName = "LINE FEED"
+	elif ord(char) == 13:
+		characterName = "CARRIAGE RETURN"
 
 	markup = ["			<tr", rowstylestring, ">\n"]
 	markup += ["				<td class='no'>", str(position),"</td>\n"]
 	markup += ["				<td class='char'>", escapeHTML(char), "</td>\n"]
 	markup += ["				<td class='hex'>", hexMarkup(char), "</td>\n"]
 	markup += ["				<td class='dec'>", str(ord(char)), "</td>\n"]
-	markup += ["				<td class='name'>", escapeHTML(unicodedata.name(char, "NAME UNKNOWN")), decompositionMarkup, "</td>\n"]
+	markup += ["				<td class='name'>", characterName, decompositionMarkup, "</td>\n"]
 	markup += ["		</tr>\n"]
 	
 	return markup
