@@ -236,7 +236,9 @@ def footMarkup():
 	<p>
 		A service by <a href="http://earthlingsoft.net">earthlingsoft</a>
 		·
-		<a href="mailto:ssp-web@earthlingsoft.net?subject=Unicode%20Split%20Up">Send Feedback</a>
+		<a href="mailto:ssp-web@earthlingsoft.net?subject=Unicode%20Split%20Up">Feedback</a>
+		·
+		<a href="http://github.com/ssp/unicode-split-up">Source Code</a>
 		·
 		<span style="position:relative;top:3px;">
 		<script type="text/javascript">
