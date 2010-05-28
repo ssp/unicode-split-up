@@ -125,6 +125,9 @@ def headMarkup ():
 			text-transform: lowercase;
 			color: #666;
 		}
+		tr {
+			line-height: 2em;
+		}
 		tr.combining, tr.control, tr.surrogate, tr.non-ASCII {
 			background: #f5d3d5;
 		}
