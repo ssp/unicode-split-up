@@ -237,6 +237,14 @@ def footMarkup():
 		A service by <a href="http://earthlingsoft.net">earthlingsoft</a>
 		·
 		<a href="mailto:ssp-web@earthlingsoft.net?subject=Unicode%20Split%20Up">Send Feedback</a>
+		·
+		<span style="position:relative;top:3px;">
+		<script type="text/javascript">
+			var flattr_url = 'http://earthlingsoft.net/unicode/split-up';
+			var flattr_btn = 'compact';
+		</script>
+		<script src="http://api.flattr.com/button/load.js" type="text/javascript"></script>
+		</span>
 	</p>
 	<p>
 		Finding this tool useful and using a Mac? Then try our <a href="http://earthlingsoft.net/UnicodeChecker/">UnicodeChecker</a> application!
