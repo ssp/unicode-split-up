@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 #coding=utf-8
 """
-Unicode Split Up 2010 by Sven-S. Porst / earthlingsoft
+Unicode Split Up 2010-2020 by Sven-S. Porst / earthlingsoft
 ssp-web@earthlingsoft.net
 Enjoy the service at http://earthlingsoft.net/unicode/split-up
 Or use the UnicodeChecker Mac application for more Unicode tools: http://earthlingsoft.net/UnicodeChecker/
@@ -239,14 +239,6 @@ def footMarkup():
 		<a href="mailto:ssp-web@earthlingsoft.net?subject=Unicode%20Split%20Up">Feedback</a>
 		·
 		<a href="http://github.com/ssp/unicode-split-up">Source Code</a>
-		·
-		<span style="position:relative;top:3px;">
-		<script type="text/javascript">
-			var flattr_url = 'http://earthlingsoft.net/unicode/split-up';
-			var flattr_btn = 'compact';
-		</script>
-		<script src="http://api.flattr.com/button/load.js" type="text/javascript"></script>
-		</span>
 	</p>
 	<p>
 		Finding this tool useful and using a Mac? Then try our <a href="http://earthlingsoft.net/UnicodeChecker/">UnicodeChecker</a> application!
@@ -284,10 +276,9 @@ def hexMarkup(char):
 	hexString = hex(ord(char))[2:]
 	zeroFiller = (4-len(hexString)) * "0"
 	hexMarkup = """<span class="hex0x">U+""" + zeroFiller + "</span>" +  hexString
-	
 	return hexMarkup
 	
-
+	
 
 def tableRowMarkupForCharacterAtPosition(char, position):
 	rowstyle = []
